@@ -1,0 +1,20 @@
+{
+  "name": "rleclercq/wordpress_admin_notification_center",
+  "authors": [
+    {
+      "name": "Rémi Leclercq",
+      "email": "leclercq.remi@gmail.com"
+    }
+  ],
+  "require": {
+    "psr/container": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WANC\\": [
+        "lib/",
+        "src/"
+      ]
+    }
+  }
+}
