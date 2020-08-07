@@ -14,7 +14,6 @@ const wanc_notification = {
         this.wancContainer = document.querySelector('#wanc_container');
 
         //We get all the notifications to display in the modal
-        console.log(document.querySelectorAll('.notice, #message'));
         this.adminNotifications = document.querySelectorAll('.notice, #message');
 
         //We get the notification button
@@ -59,8 +58,6 @@ const wanc_notification = {
             this.wancContainer.appendChild(this.adminNotifications[i]);
             numberOfNotification++;
         }
-
-        console.log(numberOfNotification > 0);
 
         if (numberOfNotification > 0) {
             //We erase the text saying there is no notifiication to display

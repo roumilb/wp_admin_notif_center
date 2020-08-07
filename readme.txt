@@ -2,9 +2,9 @@
 Contributors: roumi
 Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 7.0
-Stable tag: 1.0
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,5 @@ You can download the package on wordpress.org and install it on your website or 
 
 == Changelog ==
 
-= 1.0 =
-* Initial release
-* Move the notifications in the notification center
-* Add a setting page to force the display of some notification
+= 1.2 =
+* Fix console log
