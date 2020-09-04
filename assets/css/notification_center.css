@@ -40,3 +40,13 @@
 	line-height: 1.6;
 	text-align: center;
 }
+
+#wanc_settings_acl .wanc_settings_acl_one{
+	display: block;
+	margin-bottom: 10px;
+}
+
+#wanc_settings_acl .wanc_settings_acl_one label{
+	width: 10%;
+	display: inline-block;
+}

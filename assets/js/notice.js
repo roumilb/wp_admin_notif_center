@@ -7,7 +7,7 @@ const wanc_notification = {
     classNeedToBeDisplay: {
         'welcome-panel': 0,
         'update-message': 0,
-        'hidden': 0,
+        'hidden': 0
     },
     init: function () {
         //We get the notification center
@@ -52,7 +52,7 @@ const wanc_notification = {
         let numberOfNotification = 0;
         for (let i = 0 ; i < this.adminNotifications.length ; i++) {
             //if this is a critcal or update notification we don't display it
-            if (this.needToBeDisplayed(this.adminNotifications[i])) continue;
+            if (this.needToBeDisplayed(this.adminNotifications[i]) || this.adminNotifications[i].hasAttribute('aria-hidden')) continue;
 
             //We display it if this is a not a crucial notification
             this.wancContainer.appendChild(this.adminNotifications[i]);
@@ -91,7 +91,7 @@ const wanc_notification = {
 
         //If not we move it in the notification center
         return false;
-    },
+    }
 };
 
 wanc_notification.init();
