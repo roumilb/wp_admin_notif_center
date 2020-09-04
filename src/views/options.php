@@ -15,6 +15,7 @@
 	</ul>
 	<div id="wanc_settings_acl">
 		<h3>ACL</h3>
+		<p>This option allows you to choose which user group can see the notifications in the dashboard</p>
         <?php
         foreach ($data['display_settings_roles'] as $key => $value) {
             ?>
