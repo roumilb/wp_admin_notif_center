@@ -15,7 +15,7 @@ class WancSettings
         $optionJson = json_decode($return, true);
         if (json_last_error() === JSON_ERROR_NONE) return $optionJson;
 
-        return $option;
+        return $return;
     }
 
     public function updateOption($option, $value)

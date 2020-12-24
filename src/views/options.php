@@ -30,6 +30,12 @@
         }
         ?>
 	</div>
+	<div id="wanc_settings_spam_words">
+		<h3>Spam words</h3>
+		<p>This option allows you to set several words considered as spam, this way notifications with those words won't be shown at all.</p>
+		<p><b>Please enter your words separated by comas</b></p>
+		<textarea name="wanc_spam_words" id="wanc_spam_words" cols="30" rows="10"><?php echo $data['spam_words']; ?></textarea>
+	</div>
 	<input type="hidden" name="wanc_display[saved]">
 	<button class="button button-primary">Save settings</button>
 </form>

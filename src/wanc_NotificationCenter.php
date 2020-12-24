@@ -27,6 +27,9 @@ class wanc_NotificationCenter
         foreach ($wancDisplaySettings as $noticeType => $display) {
             $data['notice-'.$noticeType] = $display;
         }
+
+        $data['spam_words'] = $this->wancSettingsLib->getOption('wanc_spam_words', '');
+
         wanc_Views::includeViews('notification_center', $data);
         $admin_bar->add_menu(['id' => 'wanc_display_notification', 'title' => 'Notifications', 'href' => '#']);
     }
