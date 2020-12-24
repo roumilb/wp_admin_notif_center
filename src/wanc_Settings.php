@@ -41,6 +41,8 @@ class wanc_Settings
         }
         $data['display_settings_roles'] = $wancDisplaySettingsRoles;
 
+        $data['spam_words'] = $this->wancSettingsLib->getOption('wanc_spam_words', '');
+
         wanc_Views::includeViews('options', $data);
     }
 
@@ -62,6 +64,10 @@ class wanc_Settings
         $settingsRolesSubmited = array_map('sanitize_text_field', $settingsRolesSubmited);
         $this->wancSettingsLib->updateOption('wanc_display_settings_roles', json_encode($settingsRolesSubmited));
 
+        if (!empty($_REQUEST['wanc_spam_words'])) {
+            $spamWords = sanitize_text_field($_REQUEST['wanc_spam_words']);
+            $this->wancSettingsLib->updateOption('wanc_spam_words', $spamWords);
+        }
 
         return true;
     }

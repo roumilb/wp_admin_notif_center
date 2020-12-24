@@ -2,9 +2,9 @@
 Contributors: roumi
 Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 7.0
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,7 @@ Here is what you will be able to:
 * Use the bouton on the top bar to display / hide this notification center.
 * Be informed when a new notification is present (thanks to a badge displayed on your admin bar)
 * Select the notification types (information/warning/error) you want to be displayed in the notification center. And the ones you would like to be displayed at the top of your screen
+* Don't display notification containing spam words set by the user
 
 == Installation ==
 
@@ -33,6 +34,5 @@ You can download the package on wordpress.org and install it on your website or 
 
 == Changelog ==
 
-= 1.2 =
-* Add ACL feature to display notifications depending the users groups
-* Don't count the notifications which aren't displayed
+= 1.4 =
+* Don't display notification containing spam words set by the user

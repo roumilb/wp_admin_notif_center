@@ -9,6 +9,7 @@ const wanc_notification = {
         'update-message': 0,
         'hidden': 0
     },
+    spamWords: '',
     init: function () {
         //We get the notification center
         this.wancContainer = document.querySelector('#wanc_container');
@@ -25,7 +26,9 @@ const wanc_notification = {
         //We get the notification settings
         this.notificationSettings = JSON.parse(this.wancContainer.getAttribute('wanc-data-display'));
         this.notificationSettings = Object.assign(this.notificationSettings, this.classNeedToBeDisplay);
+        this.spamWords = this.notificationSettings.spam_words;
 
+        this.initSpamWords();
         this.initNotificationCenterStyle();
         this.initClickDisplayNotificationCenter();
         this.initCloseNotificationCenter();
@@ -46,13 +49,26 @@ const wanc_notification = {
         this.wancContainer.style.height = (window.innerHeight - (top + parseInt(paddingTopContainer))) + 'px';
     },
     moveNotifications: function () {
-        //If their is no notification to display => out
+        //If there is no notification to display => out
         if (this.adminNotifications.length < 1) return true;
 
         let numberOfNotification = 0;
         for (let i = 0 ; i < this.adminNotifications.length ; i++) {
-            //if this is a critcal or update notification we don't display it
-            if (this.needToBeDisplayed(this.adminNotifications[i]) || this.adminNotifications[i].hasAttribute('aria-hidden')) continue;
+            let containsSpamWord = false;
+            if (this.spamWords.length > 0) {
+                for (let j = 0 ; j < this.spamWords.length ; j++) {
+                    if (this.adminNotifications[i].innerHTML.toLowerCase().indexOf(this.spamWords[j].toLowerCase()) === -1) continue;
+                    containsSpamWord = true;
+                    break;
+                }
+            }
+            //if this is a critical or update notification we don't display it
+            if (this.needToBeDisplayed(this.adminNotifications[i])
+                || this.adminNotifications[i].hasAttribute('aria-hidden')
+                || containsSpamWord
+                || this.adminNotifications[i].classList.contains('hidden')) {
+                continue;
+            }
 
             //We display it if this is a not a crucial notification
             this.wancContainer.appendChild(this.adminNotifications[i]);
@@ -91,6 +107,26 @@ const wanc_notification = {
 
         //If not we move it in the notification center
         return false;
+    },
+    initSpamWords: function () {
+        // If no spam words set we set it with an empty array
+        if (this.spamWords === '') {
+            this.spamWords = [];
+            return true;
+        }
+
+        // we split the spam words list
+        this.spamWords = this.spamWords.split(',');
+
+        // we set a nice array by removing all white space at the start and the end of each word
+        let formattedSpamWords = [];
+        this.spamWords.map(word => {
+            formattedSpamWords.push(word.trim());
+        });
+
+        this.spamWords = formattedSpamWords;
+
+        return true;
     }
 };
 
