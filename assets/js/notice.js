@@ -36,7 +36,7 @@ const wanc_notification = {
 
         setTimeout(() => {
             this.moveNotifications();
-        }, 100);
+        }, 500);
     },
     initNotificationCenterStyle: function () {
         //We get the top and left to place it
@@ -72,7 +72,8 @@ const wanc_notification = {
 
             //We display it if this is a not a crucial notification
             this.wancContainer.appendChild(this.adminNotifications[i]);
-            numberOfNotification++;
+
+            if (this.wancContainer.lastChild.offsetHeight > 0) numberOfNotification++;
         }
 
         if (numberOfNotification > 0) {
