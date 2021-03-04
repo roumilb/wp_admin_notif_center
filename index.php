@@ -3,7 +3,7 @@
 Plugin Name: WP admin notification center
 Description: Clear and controls your notifications in the backend of your WordPress site
 Author: Rémi Leclercq
-Author URI: https://github.com/Remi-Leclercq-Blondel
+Author URI: https://github.com/roumilb
 License: GPLv3
 Version: 1.5
 Text Domain: wanc
