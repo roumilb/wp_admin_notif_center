@@ -18,7 +18,13 @@ class wanc_Settings
 
     public function registerWancOptionsPage()
     {
-        add_options_page('WP Admin notification Center', 'Notification Center Settings', 'manage_options', 'wp-admin-notification-center', [$this, 'wanc_options_page']);
+        add_options_page(
+            'WP Admin notification Center',
+            __('Notification Center Settings', 'wanc'),
+            'manage_options',
+            'wp-admin-notification-center',
+            [$this, 'wanc_options_page']
+        );
     }
 
     public function wanc_options_page()
