@@ -20,7 +20,7 @@ class WancSettings
 
     public function updateOption($option, $value)
     {
-        if (!get_option($option)) {
+        if (get_option($option) === false) {
             return add_option($option, $value);
         } else {
             return update_option($option, $value);
