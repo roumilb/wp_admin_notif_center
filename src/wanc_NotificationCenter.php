@@ -17,6 +17,9 @@ class wanc_NotificationCenter
 
     public function addItemInAdminBar($admin_bar)
     {
+        $wancSettings = new wanc_Settings();
+        $wancSettings->alreadySave = $wancSettings->wanc_saveSettings();
+
         $isAllowed = $this->wancSettingsLib->currentUserAllowed();
         if (!$isAllowed) return true;
 
@@ -29,6 +32,7 @@ class wanc_NotificationCenter
         }
 
         $data['spam_words'] = $this->wancSettingsLib->getOption('wanc_spam_words', '');
+        $data['white_list'] = $this->wancSettingsLib->getOption('wanc_white_list', '');
 
         wanc_Views::includeViews('notification_center', $data);
         $admin_bar->add_menu(['id' => 'wanc_display_notification', 'title' => 'Notifications', 'href' => '#']);

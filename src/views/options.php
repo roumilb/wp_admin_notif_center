@@ -34,7 +34,16 @@
 		<h3><?php echo __('Spam words', 'wanc') ?></h3>
 		<p><?php echo __('This option allows you to set several words considered as spam, this way notifications with those words won\'t be shown at all.', 'wanc'); ?></p>
 		<p><b><?php echo __('Please enter your words separated by comas', 'wanc'); ?></b></p>
-		<textarea name="wanc_spam_words" id="wanc_spam_words" cols="30" rows="10"><?php echo $data['spam_words']; ?></textarea>
+		<textarea name="wanc_spam_words" id="wanc_spam_words" cols="60" rows="5"><?php echo $data['spam_words']; ?></textarea>
+	</div>
+	<div id="wanc_wanc_white_list">
+		<h3><?php echo __('White list', 'wanc') ?></h3>
+		<p><?php echo __(
+                'This option allows you to set several words in the white list, this means that every notification containing one of this words will show up as usual',
+                'wanc'
+            ); ?></p>
+		<p><b><?php echo __('Please enter your words separated by comas', 'wanc'); ?></b></p>
+		<textarea name="wanc_white_list" id="wanc_white_list" cols="60" rows="5"><?php echo $data['white_list']; ?></textarea>
 	</div>
 	<input type="hidden" name="wanc_display[saved]">
 	<button class="button button-primary"><?php echo __('Save settings', 'wanc') ?></button>

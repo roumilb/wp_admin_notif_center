@@ -16,6 +16,6 @@ use \WANC\wanc_Settings;
 require __DIR__.'/vendor/autoload.php';
 
 if (is_admin()) {
-    new wanc_NotificationCenter();
     new wanc_Settings();
+    new wanc_NotificationCenter();
 }

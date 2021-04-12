@@ -8,6 +8,7 @@ class wanc_Settings
 {
     var $notices = ['success', 'info', 'warning', 'error'];
     var $wancSettingsLib;
+    var $alreadySave = false;
 
     public function __construct()
     {
@@ -48,13 +49,14 @@ class wanc_Settings
         $data['display_settings_roles'] = $wancDisplaySettingsRoles;
 
         $data['spam_words'] = $this->wancSettingsLib->getOption('wanc_spam_words', '');
+        $data['white_list'] = $this->wancSettingsLib->getOption('wanc_white_list', '');
 
         wanc_Views::includeViews('options', $data);
     }
 
     public function wanc_saveSettings()
     {
-        if (empty($_REQUEST) || empty($_REQUEST['wanc_display']) || empty($_REQUEST['wanc_roles'])) return true;
+        if (empty($_REQUEST) || empty($_REQUEST['wanc_display']) || empty($_REQUEST['wanc_roles']) || $this->alreadySave) return false;
 
         $settingsSubmited = $_REQUEST['wanc_display'];
         $settingsSubmited = array_map('sanitize_text_field', $settingsSubmited);
@@ -70,10 +72,11 @@ class wanc_Settings
         $settingsRolesSubmited = array_map('sanitize_text_field', $settingsRolesSubmited);
         $this->wancSettingsLib->updateOption('wanc_display_settings_roles', json_encode($settingsRolesSubmited));
 
-        if (!empty($_REQUEST['wanc_spam_words'])) {
-            $spamWords = sanitize_text_field($_REQUEST['wanc_spam_words']);
-            $this->wancSettingsLib->updateOption('wanc_spam_words', $spamWords);
-        }
+        $spamWords = sanitize_text_field($_REQUEST['wanc_spam_words']);
+        $this->wancSettingsLib->updateOption('wanc_spam_words', $spamWords);
+
+        $spamWords = sanitize_text_field($_REQUEST['wanc_white_list']);
+        $this->wancSettingsLib->updateOption('wanc_white_list', $spamWords);
 
         return true;
     }

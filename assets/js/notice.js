@@ -1,6 +1,7 @@
 const wanc_notification = {
     wancContainer: '',
-    adminNotifications: '',
+    preAdminNotifications: '',
+    adminNotifications: [],
     buttonNotification: '',
     closeButton: '',
     notificationSettings: '',
@@ -10,12 +11,13 @@ const wanc_notification = {
         'hidden': 0
     },
     spamWords: '',
+    whiteList: '',
     init: function () {
         //We get the notification center
         this.wancContainer = document.querySelector('#wanc_container');
 
         //We get all the notifications to display in the modal
-        this.adminNotifications = document.querySelectorAll('.notice, #message');
+        this.preAdminNotifications = document.querySelectorAll('.notice, #message');
 
         //We get the notification button
         this.buttonNotification = document.getElementById('wp-admin-bar-wanc_display_notification');
@@ -27,8 +29,11 @@ const wanc_notification = {
         this.notificationSettings = JSON.parse(this.wancContainer.getAttribute('wanc-data-display'));
         this.notificationSettings = Object.assign(this.notificationSettings, this.classNeedToBeDisplay);
         this.spamWords = this.notificationSettings.spam_words;
+        this.whiteList = this.notificationSettings.white_list;
 
-        this.initSpamWords();
+        this.initWordList('spamWords');
+        this.initWordList('whiteList');
+        this.initWhiteList();
         this.initNotificationCenterStyle();
         this.initClickDisplayNotificationCenter();
         this.initCloseNotificationCenter();
@@ -77,7 +82,7 @@ const wanc_notification = {
         }
 
         if (numberOfNotification > 0) {
-            //We erase the text saying there is no notifiication to display
+            //We erase the text saying there is no notification to display
             document.querySelector('#wanc_container h3').remove();
         }
 
@@ -109,25 +114,38 @@ const wanc_notification = {
         //If not we move it in the notification center
         return false;
     },
-    initSpamWords: function () {
-        // If no spam words set we set it with an empty array
-        if (this.spamWords === '') {
-            this.spamWords = [];
+    initWordList: function (option) {
+        // If no words in the option, we set it with an empty array
+        if (this[option] === '') {
+            this[option] = [];
             return true;
         }
 
-        // we split the spam words list
-        this.spamWords = this.spamWords.split(',');
+        // we split the words list
+        this[option] = this[option].split(',');
 
         // we set a nice array by removing all white space at the start and the end of each word
-        let formattedSpamWords = [];
-        this.spamWords.map(word => {
-            formattedSpamWords.push(word.trim());
+        let formattedWords = [];
+        this[option].map(word => {
+            formattedWords.push(word.trim());
         });
 
-        this.spamWords = formattedSpamWords;
+        this[option] = formattedWords;
 
         return true;
+    },
+    initWhiteList: function () {
+        for (let i = 0 ; i < this.preAdminNotifications.length ; i++) {
+            let notWhiteListed = true;
+            if (this.whiteList.length > 0) {
+                for (let j = 0 ; j < this.whiteList.length ; j++) {
+                    if (this.preAdminNotifications[i].innerHTML.toLowerCase().indexOf(this.whiteList[j].toLowerCase()) === -1) continue;
+                    notWhiteListed = false;
+                    break;
+                }
+            }
+            if (notWhiteListed) this.adminNotifications.push(this.preAdminNotifications[i]);
+        }
     }
 };
 
