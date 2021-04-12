@@ -5,7 +5,7 @@ Description: Clear and controls your notifications in the backend of your WordPr
 Author: Rémi Leclercq
 Author URI: https://github.com/roumilb
 License: GPLv3
-Version: 1.6
+Version: 2.0
 Text Domain: wanc
 Domain Path: /languages
 */
