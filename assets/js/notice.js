@@ -17,7 +17,7 @@ const wanc_notification = {
         this.wancContainer = document.querySelector('#wanc_container');
 
         //We get all the notifications to display in the modal
-        this.preAdminNotifications = document.querySelectorAll('.notice, #message');
+        this.preAdminNotifications = document.querySelectorAll('.notice, #message, .fs-notice');
 
         //We get the notification button
         this.buttonNotification = document.getElementById('wp-admin-bar-wanc_display_notification');
@@ -54,6 +54,7 @@ const wanc_notification = {
         this.wancContainer.style.height = (window.innerHeight - (top + parseInt(paddingTopContainer))) + 'px';
     },
     moveNotifications: function () {
+        document.getElementById('wanc_pre_notice_style-css').remove();
         //If there is no notification to display => out
         if (this.adminNotifications.length < 1) return true;
 

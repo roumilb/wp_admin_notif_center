@@ -47,5 +47,6 @@ class wanc_NotificationCenter
             wp_enqueue_script('wanc_notice_script', plugins_url('wp-admin-notification-center/assets/js/notice_not_allowed.js?time='.time()), [], false, true);
         }
         wp_enqueue_style('wanc_notice_style', plugins_url('wp-admin-notification-center/assets/css/notification_center.css?time='.time()));
+        wp_enqueue_style('wanc_pre_notice_style', plugins_url('wp-admin-notification-center/assets/css/pre_notification_center.css?time='.time()));
     }
 }
