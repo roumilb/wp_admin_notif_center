@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WANC;
+namespace WANC\Core;
 
 
 class WancSettings

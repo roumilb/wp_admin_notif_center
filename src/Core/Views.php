@@ -1,17 +1,17 @@
 <?php
 
 
-namespace WANC;
+namespace WANC\Core;
 
 
-class wanc_Views
+class Views
 {
     public static function includeViews($view, $data = [])
     {
         $dataView = $data;
-        $viewFile = __DIR__.'/views/'.$view.'.php';
+        $viewFile = __DIR__ . '/../Views/' .$view.'.php';
         if (file_exists($viewFile)) {
-            include __DIR__.'/views/'.$view.'.php';
+            include __DIR__ . '/../Views/' .$view.'.php';
         }
     }
 }

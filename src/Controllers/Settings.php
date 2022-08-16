@@ -1,10 +1,12 @@
 <?php
 
 
-namespace WANC;
+namespace WANC\Controllers;
 
+use \WANC\Core\WancSettings;
+use \WANC\Core\Views;
 
-class wanc_Settings
+class Settings
 {
     var $notices = ['success', 'info', 'warning', 'error'];
     var $wancSettingsLib;
@@ -14,23 +16,11 @@ class wanc_Settings
     {
         $this->wancSettingsLib = new WancSettings();
         $this->firstSave();
-        add_action('admin_menu', [$this, 'registerWancOptionsPage']);
     }
 
-    public function registerWancOptionsPage()
+    public function optionsPage()
     {
-        add_options_page(
-            'WP Admin notification Center',
-            __('Notification Center Settings', 'wanc'),
-            'manage_options',
-            'wp-admin-notification-center',
-            [$this, 'wanc_options_page']
-        );
-    }
-
-    public function wanc_options_page()
-    {
-        $this->wanc_saveSettings();
+        $this->saveSettings();
 
         $wancDisplaySettings = $this->wancSettingsLib->getOption('wanc_display_settings', []);
         $data['display_settings'] = $wancDisplaySettings;
@@ -51,20 +41,20 @@ class wanc_Settings
         $data['spam_words'] = $this->wancSettingsLib->getOption('wanc_spam_words', '');
         $data['white_list'] = $this->wancSettingsLib->getOption('wanc_white_list', '');
 
-        wanc_Views::includeViews('options', $data);
+        Views::includeViews('settings', $data);
     }
 
-    public function wanc_saveSettings()
+    public function saveSettings(): bool
     {
         if (empty($_REQUEST) || empty($_REQUEST['wanc_display']) || empty($_REQUEST['wanc_roles']) || $this->alreadySave) return false;
 
-        $settingsSubmited = $_REQUEST['wanc_display'];
-        $settingsSubmited = array_map('sanitize_text_field', $settingsSubmited);
+        $settingsSubmitted = $_REQUEST['wanc_display'];
+        $settingsSubmitted = array_map('sanitize_text_field', $settingsSubmitted);
 
         $wancDisplaySettings = $this->wancSettingsLib->getOption('wanc_display_settings', []);
 
         foreach ($this->notices as $notice) {
-            $wancDisplaySettings[$notice] = empty($settingsSubmited[$notice]) ? 0 : 1;
+            $wancDisplaySettings[$notice] = empty($settingsSubmitted[$notice]) ? 0 : 1;
         }
         $this->wancSettingsLib->updateOption('wanc_display_settings', json_encode($wancDisplaySettings));
 
@@ -81,7 +71,7 @@ class wanc_Settings
         return true;
     }
 
-    public function firstSave()
+    public function firstSave(): bool
     {
         $wancDisplaySettings = get_option('wanc_display_settings');
         if (empty($wancDisplaySettings)) {

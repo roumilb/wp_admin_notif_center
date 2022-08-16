@@ -4,7 +4,7 @@ Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
 Tested up to: 5.7
 Requires PHP: 7.0
-Stable tag: 2.1
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,7 @@ You can download the package on wordpress.org and install it on your website or 
 
 == Changelog ==
 
-= 2.0 =
-* Added a new feature to set a white list of words that will always display the notifications
-* Fixed settings not applied directly after the configuration is saved
-* Fixed some issue with the configuration saving process
+= 2.2 =
+* The extension has now it's own menu
+* Configuration as a better display
+* Cleaner code architecture

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WANC;
+namespace WANC\lib;
 
 
 class Debug

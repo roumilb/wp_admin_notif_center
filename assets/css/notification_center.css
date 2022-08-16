@@ -50,3 +50,14 @@
 	width: 10%;
 	display: inline-block;
 }
+
+#wanc_settings .wanc_settings_desc {
+	display: block;
+	margin-top: 10px;
+	font-weight: normal;
+	font-size: .7rem;
+}
+
+#wanc_settings ul {
+	list-style: none;
+}

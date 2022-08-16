@@ -5,17 +5,19 @@ Description: Clear and controls your notifications in the backend of your WordPr
 Author: Rémi Leclercq
 Author URI: https://github.com/roumilb
 License: GPLv3
-Version: 2.1
+Version: 2.2
 Text Domain: wanc
 Domain Path: /languages
 */
 
-use \WANC\wanc_NotificationCenter;
-use \WANC\wanc_Settings;
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+use \WANC\Init;
 
 require __DIR__.'/vendor/autoload.php';
 
 if (is_admin()) {
-    new wanc_Settings();
-    new wanc_NotificationCenter();
+    new Init();
 }
