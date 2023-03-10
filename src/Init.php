@@ -5,6 +5,7 @@ namespace WANC;
 
 use \WANC\Controllers\Settings;
 use \WANC\Controllers\NotificationCenter;
+use WANC\Services\SurveyService;
 
 class Init
 {
@@ -15,6 +16,7 @@ class Init
         add_action('admin_menu', [$this, 'registerWancOptionsPage']);
         new Settings();
         new NotificationCenter();
+        new SurveyService();
     }
 
     public function registerWancOptionsPage()

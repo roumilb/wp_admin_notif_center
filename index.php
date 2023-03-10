@@ -5,14 +5,10 @@ Description: Clear and controls your notifications in the backend of your WordPr
 Author: Rémi Leclercq
 Author URI: https://github.com/roumilb
 License: GPLv3
-Version: 2.2
+Version: 2.2.2
 Text Domain: wanc
 Domain Path: /languages
 */
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 use \WANC\Init;
 
