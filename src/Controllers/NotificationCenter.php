@@ -13,6 +13,8 @@ class NotificationCenter
     public function __construct()
     {
         $this->wancSettingsLib = new WancSettings();
+        add_filter('mailpoet_conflict_resolver_whitelist_script', [$this, 'mailpoetWhitelistScript']);
+        add_filter('mailpoet_conflict_resolver_whitelist_style', [$this, 'mailpoetWhitelistStyle']);
         add_action('admin_enqueue_scripts', [$this, 'addScript']);
         add_action('admin_bar_menu', [$this, 'addItemInAdminBar'], 100);
     }
@@ -50,5 +52,17 @@ class NotificationCenter
         }
         wp_enqueue_style('wanc_notice_style', plugins_url('wp-admin-notification-center/assets/css/notification_center.css?time='.time()));
         wp_enqueue_style('wanc_pre_notice_style', plugins_url('wp-admin-notification-center/assets/css/pre_notification_center.css?time='.time()));
+    }
+
+    public function mailpoetWhitelistScript($scripts)
+    {
+        $scripts[] = 'wp-admin-notification-center';
+        return $scripts;
+    }
+
+    public function mailpoetWhitelistStyle($styles)
+    {
+        $styles[] = 'wp-admin-notification-center';
+        return $styles;
     }
 }

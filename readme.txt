@@ -2,9 +2,9 @@
 Contributors: roumi
 Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
-Tested up to: 6.1.1
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 2.2.3
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,7 +34,6 @@ You can download the package on wordpress.org and install it on your website or 
 
 == Changelog ==
 
-= 2.2.3 =
-* Change plugin name
-* Configuration as a better display
-* Cleaner code architecture
+= 2.3 =
+* Fix incompatibility with Mailpoet
+* Change admin menu

@@ -11,7 +11,7 @@
 	padding-top: 40px;
 }
 
-#wanc_container .notice, #wanc_container #message, #wanc_container .fs-notice, #wanc_container .pms-cross-promo {
+#wanc_container .notice, #wanc_container #message, #wanc_container .fs-notice, #wanc_container .pms-cross-promo, #wanc_container .update {
 	margin: 20px 10px !important;
 }
 

@@ -22,11 +22,12 @@ class Init
     public function registerWancOptionsPage()
     {
         add_menu_page(
-            'Notification Center',
-            __('Notification Center', 'wanc'),
+            'Hide Admin Notice',
+            __('Hide Admin Notice', 'wanc'),
             'manage_options',
             self::WANC_SLUG_MENU,
-            [new Settings(), 'optionsPage']
+            [new Settings(), 'optionsPage'],
+            plugins_url('wp-admin-notification-center/assets/images/logo.svg')
         );
     }
 }
