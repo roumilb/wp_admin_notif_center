@@ -26,8 +26,7 @@ class Init
             __('Hide Admin Notice', 'wanc'),
             'manage_options',
             self::WANC_SLUG_MENU,
-            [new Settings(), 'optionsPage'],
-            plugins_url('wp-admin-notification-center/assets/images/logo.svg')
+            [new Settings(), 'optionsPage']
         );
     }
 }

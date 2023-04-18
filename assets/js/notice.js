@@ -17,7 +17,7 @@ const wanc_notification = {
         this.wancContainer = document.querySelector('#wanc_container');
 
         //We get all the notifications to display in the modal
-        this.preAdminNotifications = document.querySelectorAll('.notice, #message, .fs-notice, .pms-cross-promo, .update');
+        this.preAdminNotifications = document.querySelectorAll('.notice, #message, .fs-notice, .pms-cross-promo');
 
         //We get the notification button
         this.buttonNotification = document.getElementById('wp-admin-bar-wanc_display_notification');
