@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: WP admin notification center
+Plugin Name: Hide admin notices
 Description: Clear and controls your notifications in the backend of your WordPress site
 Author: Rémi Leclercq
 Author URI: https://github.com/roumilb
 License: GPLv3
-Version: 2.2.2
+Version: 2.2.3
 Text Domain: wanc
 Domain Path: /languages
 */

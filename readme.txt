@@ -1,14 +1,14 @@
-=== WP Admin Notification Center - Hide admin notices ===
+=== Hide admin notices - Admin Notification Center ===
 Contributors: roumi
 Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
-Tested up to: 6.0.1
+Tested up to: 6.1.1
 Requires PHP: 7.0
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Keep your dashboard clean by grouping all the wordpress notifications in a notification center.
+Keep your dashboard clean by grouping all the WordPress notice and hide them in a notification center.
 
 == Description ==
 
@@ -34,7 +34,7 @@ You can download the package on wordpress.org and install it on your website or 
 
 == Changelog ==
 
-= 2.2 =
-* The extension has now it's own menu
+= 2.2.3 =
+* Change plugin name
 * Configuration as a better display
 * Cleaner code architecture
