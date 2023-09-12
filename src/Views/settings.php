@@ -2,6 +2,7 @@
 <p><?php echo __('By default this plugin will move all of your admin notification in the notification center', 'wanc'); ?></p>
 <p><?php echo __('In this settings page you can change that and force the display of some notifications, like errors to not miss them!', 'wanc'); ?></p>
 <form method="post" action="">
+    <input name="wanc_nonce" type="hidden" value="<?=wp_create_nonce('wanc_nonce')?>" />
     <table class="form-table" role="presentation" id="wanc_settings">
         <tr>
             <th scope="row">

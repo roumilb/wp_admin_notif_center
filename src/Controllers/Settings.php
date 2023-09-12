@@ -46,7 +46,13 @@ class Settings
 
     public function saveSettings(): bool
     {
-        if (empty($_REQUEST) || empty($_REQUEST['wanc_display']) || empty($_REQUEST['wanc_roles']) || $this->alreadySave) return false;
+        if (empty($_REQUEST) || empty($_REQUEST['wanc_display']) || empty($_REQUEST['wanc_roles']) || $this->alreadySave) {
+            return false;
+        }
+
+        if (empty($_REQUEST['wanc_nonce']) || !wp_verify_nonce($_REQUEST['wanc_nonce'],'wanc_nonce') || !is_user_logged_in()) {
+            return false;
+        }
 
         $settingsSubmitted = $_REQUEST['wanc_display'];
         $settingsSubmitted = array_map('sanitize_text_field', $settingsSubmitted);
