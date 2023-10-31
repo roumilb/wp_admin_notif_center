@@ -16,7 +16,9 @@ class Repository
 
     public function createDatabaseTable() {
         $query = 'CREATE TABLE '.$this->tableName.'(';
-        $columns = [];
+        $columns = [
+            '`id` INT NOT NULL AUTO_INCREMENT'
+        ];
         foreach ($this->attributes as $attribute) {
             switch ($attribute['type']) {
                 case 'int':
@@ -39,6 +41,7 @@ class Repository
 
             $columns[] = $column;
         }
+        $columns[] = 'PRIMARY KEY (`id`)';
         $query .= implode(',', $columns);
         $query .= ');';
 
@@ -51,14 +54,27 @@ class Repository
             $entityClass = $this->entity;
         }
 
-        if (!class_exists($entityClass) || empty($data)) {
+        if (!class_exists($entityClass) || empty($array)) {
             return null;
         }
 
         $entity = new $entityClass();
 
+        $attributeKeys = array_keys($this->attributes);
+
         foreach ($array as $key => $value) {
-            $setFunctionName = 'set'.ucfirst($key);
+            if ($key === 'id') {
+                $setFunctionName = 'set'.ucfirst($key);
+            } else {
+                $newKey = array_search($key, array_column($this->attributes, 'column'));
+
+                if (empty($attributeKeys[$newKey])) {
+                    continue;
+                }
+
+                $setFunctionName = 'set'.ucfirst($attributeKeys[$newKey]);
+            }
+
             if (method_exists($entityClass, $setFunctionName)) {
                 $entity->$setFunctionName($value);
             }
@@ -79,23 +95,13 @@ class Repository
                 continue;
             }
 
-            $value = $entity->$getFunctionName();
-
-            switch ($attribute['type']) {
-                case 'text':
-                case 'datetime':
-                    $value = '"'.esc_sql($value).'"';
-                    break;
-                case 'int':
-                    $value = intval($value);
-                    break;
-            }
-
-            $values[$attribute['column']] = $value;
+            $values[$attribute['column']] = $entity->$getFunctionName();
         }
 
-        $query = 'INSERT INTO '.$this->tableName.' ('.implode(',', array_keys($values)).') VALUES('.implode(',', $values).')';
-
-        $
+        if (empty($entity->getId())) {
+            return Database::insert($this->tableName, $values);
+        } else {
+            return Database::update($entity->getId(), $this->tableName, $values);
+        }
     }
 }

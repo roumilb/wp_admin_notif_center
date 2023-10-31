@@ -166,10 +166,11 @@ const wanc_notification = {
         formData.set('action', 'save_notices');
         notices.forEach((notice, index) => {
             formData.set(`notices[${index}]`, JSON.stringify(notice));
-        })
-        // formData.set('notices', JSON.stringify(notices));
+        });
 
-        fetch(ajaxurl, {method: 'POST', body: formData});
+        fetch(ajaxurl, {method: 'POST', body: formData}).then(response => {
+            return response.text();
+        });
     }
 };
 

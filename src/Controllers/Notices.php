@@ -2,8 +2,10 @@
 
 namespace WANC\Controllers;
 
+use WANC\Core\Views;
 use WANC\Entities\Notice;
 use WANC\Repositories\NoticeRepository;
+use WANC\Services\NoticeListingService;
 
 class Notices
 {
@@ -11,16 +13,15 @@ class Notices
 
     public function __construct()
     {
-        $this->allowedKses = wp_kses_allowed_html() + ['div' => []];
         add_action('wp_ajax_save_notices', [$this, 'saveNotice']);
+        $this->allowedKses = wp_kses_allowed_html() + ['div' => []];
     }
 
     public function sanitizeHtml($content) {
-        return wp_kses(stripslashes($content), $this->allowedKses);
+        return strip_tags(stripslashes($content));
     }
 
     public function saveNotice(){
-        echo '<pre>';
         $rawNotices = array_map([$this, 'sanitizeHtml'], $_POST['notices']);
 
         if (empty(wp_get_current_user())) {
@@ -34,16 +35,17 @@ class Notices
         $noticeRepository = new NoticeRepository();
         $dateNow = new \DateTime('now');
         $dateToSave = $dateNow->format('Y-m-d H:i:s');
+        $userId = wp_get_current_user()->ID;
 
         foreach ($rawNotices as $rawNotice) {
             $rawNotice = strip_tags($rawNotice, '<p><a><div>');
             $rawNotice = str_replace('"', '', $rawNotice);
-            $notice = $noticeRepository->getOneByContent($rawNotice);
+            $notice = $noticeRepository->getOneByContentUserId($rawNotice, $userId);
 
             if (empty($notice)) {
                 $notice = new Notice();
                 $notice->setContent($rawNotice);
-                $notice->setUserId(wp_get_current_user()->ID);
+                $notice->setUserId($userId);
                 $notice->setFirstSeenDate($dateToSave);
                 $currentNumberSeen = 0;
             } else {
@@ -62,5 +64,10 @@ class Notices
         ];
 
         wp_send_json($return);
+    }
+
+    public function listing() {
+        $noticeListingService = new NoticeListingService();
+        Views::includeViews('notice/listing', ['noticeListingService' => $noticeListingService]);
     }
 }
