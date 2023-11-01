@@ -1,0 +1,3 @@
+#adminmenu :not(.toplevel_page_site-card) .wp-menu-image img {
+    max-width: 20px;
+}

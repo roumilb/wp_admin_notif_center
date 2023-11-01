@@ -2,6 +2,7 @@ const wanc_notification = {
     wancContainer: '',
     preAdminNotifications: '',
     adminNotifications: [],
+    notificationsDisplayed: [],
     buttonNotification: '',
     closeButton: '',
     notificationSettings: '',
@@ -41,13 +42,14 @@ const wanc_notification = {
 
         setTimeout(() => {
             this.moveNotifications();
+            this.saveNotices();
         }, 500);
     },
     initNotificationCenterStyle: function () {
         //We get the top and left to place it
-        let top = this.buttonNotification.offsetTop + this.buttonNotification.offsetHeight;
+        const top = this.buttonNotification.offsetTop + this.buttonNotification.offsetHeight;
 
-        let paddingTopContainer = document.defaultView.getComputedStyle(this.wancContainer, '').getPropertyValue('padding-top').replace(/[^-\d\.]/g, '');
+        const paddingTopContainer = document.defaultView.getComputedStyle(this.wancContainer, '').getPropertyValue('padding-top').replace(/[^-\d\.]/g, '');
 
         //We place it
         this.wancContainer.style.top = top + 'px';
@@ -81,6 +83,7 @@ const wanc_notification = {
 
             //We display it if this is a not a crucial notification
             this.wancContainer.appendChild(this.adminNotifications[i]);
+            this.notificationsDisplayed.push(this.adminNotifications[i]);
 
             if (this.wancContainer.lastChild.offsetHeight > 0) numberOfNotification++;
         }
@@ -110,7 +113,7 @@ const wanc_notification = {
         });
     },
     needToBeDisplayed: function (notification) {
-        //let's run the settings and check if there something to display
+        //let's run the settings and check if there is something to display
         for (let [noticeClass, displayNotice] of Object.entries(this.notificationSettings)) {
             if (displayNotice !== 1 && notification.classList.contains(noticeClass)) return true;
         }
@@ -129,7 +132,7 @@ const wanc_notification = {
         this[option] = this[option].split(',');
 
         // we set a nice array by removing all white space at the start and the end of each word
-        let formattedWords = [];
+        const formattedWords = [];
         this[option].map(word => {
             formattedWords.push(word.trim());
         });
@@ -150,6 +153,18 @@ const wanc_notification = {
             }
             if (notWhiteListed) this.adminNotifications.push(this.preAdminNotifications[i]);
         }
+    },
+    saveNotices: function () {
+        const formData = new FormData();
+
+        formData.set('action', 'save_notices');
+        this.notificationsDisplayed.forEach((notice, index) => {
+            formData.set(`notices[${index}]`, JSON.stringify(notice.outerHTML));
+        });
+
+        fetch(ajaxurl, {method: 'POST', body: formData}).then(response => {
+            return response.text();
+        });
     }
 };
 
