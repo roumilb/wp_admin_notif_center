@@ -9,12 +9,9 @@ use WANC\Services\NoticeListingService;
 
 class Notices
 {
-    private $allowedKses;
-
     public function __construct()
     {
         add_action('wp_ajax_save_notices', [$this, 'saveNotice']);
-        $this->allowedKses = wp_kses_allowed_html() + ['div' => []];
     }
 
     public function sanitizeHtml($content) {
