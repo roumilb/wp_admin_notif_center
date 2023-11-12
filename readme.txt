@@ -2,9 +2,9 @@
 Contributors: roumi
 Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 2.3.3
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,5 +34,7 @@ You can download the package on wordpress.org and install it on your website or 
 
 == Changelog ==
 
-= 2.3.3 =
-* Fix CSRF Vulnerability
+= 3.0.0 =
+* Store notice displayed in the admin
+* Listing of all notices stored
+* Change admin menu icon
