@@ -6,7 +6,6 @@ namespace WANC;
 use WANC\Controllers\Notices;
 use WANC\Controllers\Settings;
 use WANC\Controllers\NotificationCenter;
-use WANC\Services\SurveyService;
 use WANC\Services\UpdateService;
 
 class Init
@@ -15,14 +14,15 @@ class Init
 
     public function __construct()
     {
-        (new UpdateService())->update();
+        if (is_admin()) {
+            (new UpdateService())->update();
+        }
 
         add_action('admin_menu', [$this, 'registerWancOptionsPage']);
         add_action('admin_enqueue_scripts', [$this, 'addScript']);
         new Notices();
         new Settings();
         new NotificationCenter();
-        new SurveyService();
     }
 
     public function registerWancOptionsPage()
