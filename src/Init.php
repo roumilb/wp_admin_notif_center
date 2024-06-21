@@ -14,11 +14,6 @@ class Init
 
     public function __construct()
     {
-        if (is_admin()) {
-            (new UpdateService())->install();
-            (new UpdateService())->update();
-        }
-
         add_action('admin_menu', [$this, 'registerWancOptionsPage']);
         add_action('admin_enqueue_scripts', [$this, 'addScript']);
         new Notices();

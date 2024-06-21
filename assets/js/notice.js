@@ -42,7 +42,6 @@ const wanc_notification = {
 
         setTimeout(() => {
             this.moveNotifications();
-            this.saveNotices();
         }, 500);
     },
     initNotificationCenterStyle: function () {
@@ -156,18 +155,6 @@ const wanc_notification = {
             if (notWhiteListed) this.adminNotifications.push(this.preAdminNotifications[i]);
         }
     },
-    saveNotices: function () {
-        const formData = new FormData();
-
-        formData.set('action', 'save_notices');
-        this.notificationsDisplayed.forEach((notice, index) => {
-            formData.set(`notices[${index}]`, JSON.stringify(notice.outerHTML));
-        });
-
-        fetch(ajaxurl, {method: 'POST', body: formData}).then(response => {
-            return response.text();
-        });
-    }
 };
 
 wanc_notification.init();
