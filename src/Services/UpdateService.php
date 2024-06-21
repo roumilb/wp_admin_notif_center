@@ -5,6 +5,7 @@ namespace WANC\Services;
 use WANC\Core\WancSettings;
 use WANC\Debug;
 use WANC\Repositories\NoticeRepository;
+use WANC\Database;
 
 class UpdateService
 {
@@ -28,5 +29,16 @@ class UpdateService
         }
 
         $wancSettings->updateOption('wanc_version', $currentVersion);
+    }
+
+    public function install() {
+        $tableWanc = Database::getVar('SHOW TABLES LIKE "%wanc%"');
+
+        if(!empty($tableWanc)) {
+            return;
+        }
+
+        $noticeRepository = new NoticeRepository();
+        $noticeRepository->createDatabaseTable();
     }
 }

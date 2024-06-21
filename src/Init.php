@@ -15,6 +15,7 @@ class Init
     public function __construct()
     {
         if (is_admin()) {
+            (new UpdateService())->install();
             (new UpdateService())->update();
         }
 

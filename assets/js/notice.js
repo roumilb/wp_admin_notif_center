@@ -64,10 +64,10 @@ const wanc_notification = {
         if (this.adminNotifications.length < 1) return true;
 
         let numberOfNotification = 0;
-        for (let i = 0 ; i < this.adminNotifications.length ; i++) {
+        for (let i = 0; i < this.adminNotifications.length; i++) {
             let containsSpamWord = false;
             if (this.spamWords.length > 0) {
-                for (let j = 0 ; j < this.spamWords.length ; j++) {
+                for (let j = 0; j < this.spamWords.length; j++) {
                     if (this.adminNotifications[i].innerHTML.toLowerCase().indexOf(this.spamWords[j].toLowerCase()) === -1) continue;
                     containsSpamWord = true;
                     break;
@@ -93,8 +93,10 @@ const wanc_notification = {
             document.querySelector('#wanc_container h3').remove();
         }
 
-        //We display the number of notification
-        this.buttonNotification.childNodes[0].innerHTML += ' <span id="wanc_display_notification_number">' + numberOfNotification + '</span>';
+        if (numberOfNotification) {
+            //We display the number of notification
+            this.buttonNotification.childNodes[0].innerHTML += ' <span id="wanc_display_notification_number">' + numberOfNotification + '</span>';
+        }
     },
     initClickDisplayNotificationCenter: function () {
         this.buttonNotification.addEventListener('click', () => {
@@ -142,10 +144,10 @@ const wanc_notification = {
         return true;
     },
     initWhiteList: function () {
-        for (let i = 0 ; i < this.preAdminNotifications.length ; i++) {
+        for (let i = 0; i < this.preAdminNotifications.length; i++) {
             let notWhiteListed = true;
             if (this.whiteList.length > 0) {
-                for (let j = 0 ; j < this.whiteList.length ; j++) {
+                for (let j = 0; j < this.whiteList.length; j++) {
                     if (this.preAdminNotifications[i].innerHTML.toLowerCase().indexOf(this.whiteList[j].toLowerCase()) === -1) continue;
                     notWhiteListed = false;
                     break;
