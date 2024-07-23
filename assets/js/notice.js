@@ -75,8 +75,12 @@ const wanc_notification = {
             //if this is a critical or update notification we don't display it
             if (this.needToBeDisplayed(this.adminNotifications[i])
                 || this.adminNotifications[i].hasAttribute('aria-hidden')
-                || containsSpamWord
                 || this.adminNotifications[i].classList.contains('hidden')) {
+                continue;
+            }
+
+            if (containsSpamWord) {
+                this.adminNotifications[i].setAttribute('style', 'display: none !important;');
                 continue;
             }
 
