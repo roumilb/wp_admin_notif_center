@@ -3,8 +3,8 @@
 namespace WANC\Services;
 
 use WANC\Core\WancSettings;
-use WANC\Debug;
 use WANC\Repositories\NoticeRepository;
+use WANC\Database;
 
 class UpdateService
 {
