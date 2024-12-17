@@ -2,9 +2,9 @@
 Contributors: roumi
 Tags: notification, notice, notices, notifications, admin
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 7.0
-Stable tag: 3.2.2
+Stable tag: 3.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
