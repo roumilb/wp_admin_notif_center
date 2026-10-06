@@ -2,3 +2,4 @@ vendor
 .idea
 assets/.DS_Store
 .DS_Store
+.playwright-mcp
